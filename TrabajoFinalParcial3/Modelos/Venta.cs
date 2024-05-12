@@ -13,7 +13,7 @@ namespace TrabajoFinalParcial3.Modelos
     {
         public int Ven_Folio { get; set; }
         public string Ven_Importe { get; set; }
-        public DateTime Ven_Fecha { get; set; }
+        public string Ven_Fecha { get; set; }
         public string Ven_IdUsuario {  get; set; }
         public int Ven_Estatus { get; set; }
 
@@ -43,7 +43,7 @@ namespace TrabajoFinalParcial3.Modelos
 
         }
 
-        public bool Guardar(int Folio, string Importe, DateTime Fecha, string IdUsuario, int Estatus)
+        public bool Guardar(int Folio, string Importe, string Fecha, string IdUsuario, int Estatus)
         {
             Boolean b = false;
             try

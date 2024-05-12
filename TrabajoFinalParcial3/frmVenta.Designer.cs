@@ -74,7 +74,6 @@
             // 
             // dtpFecha
             // 
-            this.dtpFecha.Enabled = false;
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(889, 103);
             this.dtpFecha.Name = "dtpFecha";
@@ -132,6 +131,7 @@
             this.txtIdProducto.Name = "txtIdProducto";
             this.txtIdProducto.Size = new System.Drawing.Size(87, 30);
             this.txtIdProducto.TabIndex = 7;
+            this.txtIdProducto.TextChanged += new System.EventHandler(this.txtIdProducto_TextChanged);
             // 
             // txtProducto
             // 

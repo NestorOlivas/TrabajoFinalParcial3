@@ -21,6 +21,7 @@ namespace TrabajoFinalParcial3
         Venta venta = new Venta();
         DataTable dataTable1 = new DataTable();
         string idMax = "";
+        int ID = 0;
 
         public static string Key = "3Ad2";
         public static string Resultado = "";
@@ -35,6 +36,10 @@ namespace TrabajoFinalParcial3
 
             user = usuario;
 
+            GenerarFolio();
+        }
+        void GenerarFolio()
+        {
             if (venta.ObetenerIdMax(ref dataTable1))
             {
                 foreach (DataRow row in dataTable1.Rows)
@@ -52,7 +57,6 @@ namespace TrabajoFinalParcial3
             }
             txtFolio.Text = idMax;
         }
-
         private void frmVenta_Load(object sender, EventArgs e)
         {
             cargardg();
@@ -60,7 +64,7 @@ namespace TrabajoFinalParcial3
 
         private void btnBuscarProducto_Click(object sender, EventArgs e)
         {
-            int ID = 0;
+            
             DataTable dataTable = new DataTable();
             Producto producto = new Producto();
             if(txtIdProducto.TextLength > 0)
@@ -154,7 +158,7 @@ namespace TrabajoFinalParcial3
         {
             int Folio = 0, IdUsuario = 0, Estatus = 1;
             decimal Importe = 0;
-            DateTime Fecha = DateTime.Now;
+            string Fecha = dtpFecha.Value.Year + "-" + dtpFecha.Value.Month + "-" + dtpFecha.Value.Day; ;
             Folio = Convert.ToInt32(txtFolio.Text);
             IdUsuario = user.Us_Id;
 
@@ -179,6 +183,7 @@ namespace TrabajoFinalParcial3
                 Venta venta = new Venta();
                 venta.Guardar(Folio, ImporteEncrip, Fecha, UsuarioEncrip, Estatus);
                 MessageBox.Show("La venta se guardo con exito");
+                GenerarFolio();
             }catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
@@ -238,8 +243,13 @@ namespace TrabajoFinalParcial3
 
         private void btnResumen_Click(object sender, EventArgs e)
         {
-            frmResumen x = new frmResumen();
+            frmResumen x = new frmResumen(user);
             x.ShowDialog();
+        }
+
+        private void txtIdProducto_TextChanged(object sender, EventArgs e)
+        {
+            //
         }
     }
 }

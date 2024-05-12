@@ -41,5 +41,29 @@ namespace TrabajoFinalParcial3.Modelos
 
             return b;
         }
+
+        public Boolean BuscarUsuarioID(ref DataTable tabla, int id)
+        {
+            Boolean b = false;
+            try
+            {
+                using (SqlConnection con = new SqlConnection($"Data Source = localhost\\SQLSERVER2019; Initial Catalog = TrabajoParcial3;User = sa; Password = 21030561"))
+                {
+                    con.Open();
+                    string Query = $"Select * from Usuario where Us_Id = '{id}'";
+                    SqlCommand command = new SqlCommand(Query, con);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(tabla);
+                    b = true;
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            return b;
+        }
     }
 }
