@@ -95,48 +95,55 @@ namespace TrabajoFinalParcial3
         {
             DataTable dataTable = new DataTable();
             Usuario usuario = new Usuario();
-            if(usuario.BuscarUsuario(ref dataTable, txtUsuario.Text))
+            if(txtUsuario.Text.Length > 0 && txtPass.Text.Length > 0)
             {
-                if (dataTable.Rows.Count == 0)
+                if (usuario.BuscarUsuario(ref dataTable, txtUsuario.Text))
                 {
-                    MessageBox.Show("No se encontró al usuario");
-                }
-                else
-                {
-                    foreach (DataRow dr in dataTable.Rows)
+                    if (dataTable.Rows.Count == 0)
                     {
-                        usuario.Us_Id = Convert.ToInt32(dr[0]);
-                        usuario.Us_Nombre = dr[1].ToString();
-                        usuario.Us_Password = dr[2].ToString();
-                        usuario.Us_Rol = Convert.ToInt32(dr[3]);
-
-                    }
-                    //-------------------------Generar llave de TripleDes--------------------------------
-                    string id = usuario.Us_Id.ToString();
-                    string nom = usuario.Us_Nombre.Substring(0, 2);
-                    string rol = usuario.Us_Rol.ToString();
-                    Key = id + nom + rol;
-                    //-------------------------Generar llave de TripleDes--------------------------------
-
-                    //-----------------------Desencriptar-------------------------
-                    Resultado = desencriptar(usuario.Us_Password);
-                    DesencriptarRSA();
-                    //-----------------------Desencriptar-------------------------
-
-                    if (Resultado == txtPass.Text)
-                    {
-                        //MessageBox.Show("Se encontró al usuario: " + usuario.Us_Nombre);
-                        frmVenta x = new frmVenta(usuario);
-                        this.Hide();
-                        x.Show(this);
+                        MessageBox.Show("No se encontró al usuario");
                     }
                     else
                     {
-                        MessageBox.Show("Contraseña incorrecta");
+                        foreach (DataRow dr in dataTable.Rows)
+                        {
+                            usuario.Us_Id = Convert.ToInt32(dr[0]);
+                            usuario.Us_Nombre = dr[1].ToString();
+                            usuario.Us_Password = dr[2].ToString();
+                            usuario.Us_Rol = Convert.ToInt32(dr[3]);
+
+                        }
+                        //-------------------------Generar llave de TripleDes--------------------------------
+                        string id = usuario.Us_Id.ToString();
+                        string nom = usuario.Us_Nombre.Substring(0, 2);
+                        string rol = usuario.Us_Rol.ToString();
+                        Key = id + nom + rol;
+                        //-------------------------Generar llave de TripleDes--------------------------------
+
+                        //-----------------------Desencriptar-------------------------
+                        Resultado = desencriptar(usuario.Us_Password);
+                        DesencriptarRSA();
+                        //-----------------------Desencriptar-------------------------
+
+                        if (Resultado == txtPass.Text)
+                        {
+                            //MessageBox.Show("Se encontró al usuario: " + usuario.Us_Nombre);
+                            frmVenta x = new frmVenta(usuario);
+                            this.Hide();
+                            x.Show(this);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Contraseña incorrecta");
+                        }
+                        //MessageBox.Show(Key);
+
                     }
-                    //MessageBox.Show(Key);
-                    
                 }
+            }
+            else
+            {
+                MessageBox.Show("Favor de ingresar los datos necesarios");
             }
         }
     }

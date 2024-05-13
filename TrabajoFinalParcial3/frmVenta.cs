@@ -166,24 +166,31 @@ namespace TrabajoFinalParcial3
 
             try
             {
-                foreach (DataGridViewRow row in dgVentaDetalle.Rows)
+                if(txtIdProducto.Text.Length > 0 && txtPrecio.Text.Length > 0)
                 {
-                    if (row.Cells["SubTotal"].Value != null)
-                        Importe += (decimal)row.Cells["SubTotal"].Value;
+                    foreach (DataGridViewRow row in dgVentaDetalle.Rows)
+                    {
+                        if (row.Cells["SubTotal"].Value != null)
+                            Importe += (decimal)row.Cells["SubTotal"].Value;
+                    }
+
+                    //-----------------------------Encriptar datos-----------------------------
+                    EncriptarRSA(Importe.ToString());
+                    ImporteEncrip = encriptar(Resultado);
+
+                    EncriptarRSA(IdUsuario.ToString());
+                    UsuarioEncrip = encriptar(Resultado);
+                    //-----------------------------Encriptar datos-----------------------------
+
+                    Venta venta = new Venta();
+                    venta.Guardar(Folio, ImporteEncrip, Fecha, UsuarioEncrip, Estatus);
+                    MessageBox.Show("La venta se guardo con exito");
+                    GenerarFolio();
                 }
-
-                //-----------------------------Encriptar datos-----------------------------
-                EncriptarRSA(Importe.ToString());
-                ImporteEncrip = encriptar(Resultado);
-
-                EncriptarRSA(IdUsuario.ToString());
-                UsuarioEncrip = encriptar(Resultado);
-                //-----------------------------Encriptar datos-----------------------------
-
-                Venta venta = new Venta();
-                venta.Guardar(Folio, ImporteEncrip, Fecha, UsuarioEncrip, Estatus);
-                MessageBox.Show("La venta se guardo con exito");
-                GenerarFolio();
+                else
+                {
+                    MessageBox.Show("Datos incompletos");
+                }
             }catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
@@ -250,6 +257,22 @@ namespace TrabajoFinalParcial3
         private void txtIdProducto_TextChanged(object sender, EventArgs e)
         {
             //
+        }
+
+        private void txtIdProducto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

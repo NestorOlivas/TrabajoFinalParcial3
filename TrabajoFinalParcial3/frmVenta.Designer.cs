@@ -74,6 +74,7 @@
             // 
             // dtpFecha
             // 
+            this.dtpFecha.Enabled = false;
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(889, 103);
             this.dtpFecha.Name = "dtpFecha";
@@ -132,6 +133,7 @@
             this.txtIdProducto.Size = new System.Drawing.Size(87, 30);
             this.txtIdProducto.TabIndex = 7;
             this.txtIdProducto.TextChanged += new System.EventHandler(this.txtIdProducto_TextChanged);
+            this.txtIdProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIdProducto_KeyPress);
             // 
             // txtProducto
             // 
@@ -152,6 +154,7 @@
             this.txtCantidad.Size = new System.Drawing.Size(87, 30);
             this.txtCantidad.TabIndex = 9;
             this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
+            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // txtPrecio
             // 

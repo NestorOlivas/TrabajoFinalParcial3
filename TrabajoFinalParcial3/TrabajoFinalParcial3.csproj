@@ -115,6 +115,7 @@
     <Content Include="Resources\agregar%281%29.png" />
     <Content Include="Resources\BUSCARR.png" />
     <Content Include="Resources\GUARDAR.png" />
+    <Content Include="Resources\Informe.png" />
     <Content Include="Resources\Limpiar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
